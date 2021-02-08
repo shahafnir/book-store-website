@@ -1,0 +1,25 @@
+<div class="header-container">
+  <div class="title" routerLinkActive="active" [routerLink]="['/']">
+    <div class="icon">
+      <img src="../../assets/images/books_icon.svg" alt="books" />
+    </div>
+    <div class="text">GIMME SOME BOOKS</div>
+  </div>
+  <ul class="links-list">
+    <li class="link-item">
+      <a routerLinkActive="active" [routerLink]="['/books']" class="link"
+        >Books</a
+      >
+    </li>
+    <li class="link-item">
+      <a routerLinkActive="active" [routerLink]="['/cart']" class="link"
+        >Cart</a
+      >
+    </li>
+    <li class="link-item">
+      <a routerLinkActive="active" [routerLink]="['/auth']" class="link"
+        >Login / Create Account</a
+      >
+    </li>
+  </ul>
+</div>
