@@ -53,3 +53,31 @@
     }
   }
 }
+
+@media only screen and (min-width: 1024px) {
+  .header-container {
+    .title {
+      .icon {
+      }
+
+      .text {
+        font-size: $font-size-default * 1.9;
+      }
+
+      &.active {
+      }
+    }
+
+    .links-list {
+      .link-item {
+        .link {
+          font-size: $font-size-default * 1.2;
+
+          &:hover,
+          &:active {
+          }
+        }
+      }
+    }
+  }
+}
