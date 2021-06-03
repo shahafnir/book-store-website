@@ -1,3 +1,13 @@
 <div class="shopping-cart-container">
-  <p>shopping-cart works!</p>
+  <h1 class="title">Shopping Cart</h1>
+  <app-item-list
+    [cartItems]="cart.items"
+    *ngIf="cart.items.length !== 0"
+  ></app-item-list>
+  <div class="total-cost" *ngIf="cart.items.length !== 0">
+    Total cost: {{ cart.totalCost | number: "1.0-2" }} $
+  </div>
+  <div class="message" *ngIf="cart.items.length === 0">
+    Your cart is empty...
+  </div>
 </div>

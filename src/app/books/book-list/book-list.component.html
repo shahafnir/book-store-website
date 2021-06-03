@@ -1,32 +1,39 @@
 <div class="book-list-container">
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
-  <app-book-item></app-book-item>
+  <div class="book-list">
+    <app-book-item
+      *ngFor="let book of books; let i = index"
+      [book]="book"
+      [index]="i"
+    ></app-book-item>
+    <div class="alert-message">{{ alertMessage }}</div>
+  </div>
+  <div class="page-numbers">
+    <button
+      class="next-previous-btn"
+      (click)="onPreviousPage()"
+      [disabled]="currentPage === 1"
+    >
+      <<
+    </button>
+    <ul class="page-number-list">
+      <li class="page-item" *ngFor="let pageNumber of pageNumbers">
+        <button
+          class="text"
+          (click)="onGoToPage(pageNumber)"
+          [disabled]="pageNumber === currentPage"
+        >
+          {{ pageNumber }}
+        </button>
+      </li>
+    </ul>
+    <button
+      class="next-previous-btn"
+      (click)="onNextPage()"
+      [disabled]="
+        currentPage === pageNumbers.length || pageNumbers.length === 0
+      "
+    >
+      >>
+    </button>
+  </div>
 </div>

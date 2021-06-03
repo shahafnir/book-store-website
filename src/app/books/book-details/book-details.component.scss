@@ -1,0 +1,208 @@
+@import "../../../sass/styles.scss";
+
+.book-details-container {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    .title {
+      @include title-primary;
+      text-indent: 1rem;
+    }
+
+    .author {
+      @include title-secondary;
+      margin: -15px 0 20px;
+      text-indent: 2rem;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .book-cover-container {
+      width: 200px;
+      margin: 0 auto;
+
+      .book-cover {
+        width: 100%;
+      }
+    }
+
+    .separator {
+      @include seperator-horizontal;
+      width: 100%;
+      margin: 5px auto 10px;
+    }
+
+    .book-details-list {
+      .detail-item {
+        font-size: $font-size-default * 1.2;
+        margin-bottom: 8px;
+
+        &.price {
+        }
+
+        span {
+          @include title-secondary;
+          color: $text-label-color-dark;
+          font-size: $font-size-default * 1.2;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .add-to-cart-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+      @include button-primary;
+      margin-bottom: 0;
+    }
+  }
+
+  .admin-options {
+    @include admin-options;
+    width: 70px;
+    justify-content: space-between;
+  }
+
+  .book-description {
+    margin-top: 20px;
+    color: $text-primary-color-dark;
+    padding-right: 20px;
+
+    label {
+      @include title-secondary;
+      color: $text-label-color-dark;
+      font-weight: 700;
+    }
+
+    .content {
+      margin-top: 10px;
+      line-height: 1.3;
+      font-size: $font-size-default * 1.1;
+    }
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .book-details-container {
+    .label {
+      .title {
+      }
+
+      .author {
+        margin: -15px 0 20px;
+      }
+    }
+
+    .info {
+      width: 100%;
+      flex-direction: row;
+
+      .book-cover-container {
+        margin: 0;
+
+        .book-cover {
+          width: 200px;
+        }
+      }
+
+      .separator {
+        @include seperator-vertical;
+        height: 270px;
+        margin: auto 10px;
+      }
+
+      .book-details-list {
+        height: 270px;
+        margin: auto 10px;
+
+        .detail-item {
+          &.price {
+          }
+        }
+      }
+    }
+
+    .add-to-cart-btn-container {
+      margin: 15px 0 0 10px;
+      justify-content: flex-start;
+
+      button {
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .book-details-container {
+    padding: 0 20px;
+
+    .label {
+      .title {
+      }
+
+      .author {
+        margin: -20px 0 20px;
+      }
+    }
+
+    .info {
+      .book-cover-container {
+        width: 240px;
+        max-height: 414px;
+
+        .book-cover {
+          width: 100%;
+        }
+      }
+
+      .separator {
+      }
+
+      .book-details-list {
+        .detail-item {
+          margin-bottom: 15px;
+
+          &.price {
+          }
+
+          span {
+            font-size: $font-size-default * 1.2;
+          }
+        }
+      }
+    }
+
+    .add-to-cart-btn-container {
+      margin-left: 30px;
+      button {
+      }
+    }
+
+    .admin-options {
+      margin-top: 30px;
+    }
+
+    .book-description {
+      label {
+        font-size: $font-size-default * 1.2;
+      }
+
+      .content {
+        font-size: $font-size-default * 1.2;
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<div class="book-new-container">
+  <form (ngSubmit)="onSubmit()" [formGroup]="bookForm" class="new-book-form">
+    <h2 class="title">Add New Book</h2>
+    <label>
+      Title:
+      <input
+        type="text"
+        formControlName="title"
+        required
+        #title
+        (input)="resetSubmissionStatus()"
+      />
+    </label>
+    <label>
+      Author:
+      <input
+        type="text"
+        formControlName="author"
+        required
+        #author
+        name="author"
+        id="author"
+        [ngClass]="{ alert: author.invalid }"
+      />
+    </label>
+    <label>
+      Publisher:
+      <input
+        type="text"
+        formControlName="publisher"
+        required
+        #publisher
+        name="publisher"
+        id="publisher"
+        [ngClass]="{ alert: publisher.invalid }"
+      />
+    </label>
+    <label>
+      Publication Date:
+      <input
+        type="date"
+        formControlName="publicationDate"
+        required
+        #publicationDate
+        name="publicationDate"
+        id="publicationDate"
+        [ngClass]="{ alert: publicationDate.invalid }"
+      />
+    </label>
+    <label>
+      Language:
+      <input
+        type="text"
+        formControlName="language"
+        required
+        #language
+        name="language"
+        id="language"
+        [ngClass]="{ alert: language.invalid }"
+      />
+    </label>
+    <label>
+      Price $:
+      <input
+        type="number"
+        formControlName="priceUSD"
+        required
+        #priceUSD
+        name="priceUSD"
+        id="priceUSD"
+        [ngClass]="{ alert: priceUSD.invalid }"
+      />
+    </label>
+    <label>
+      Image URL:
+      <input
+        type="url"
+        formControlName="imgURL"
+        required
+        #imgURL
+        name="imgURL"
+        id="imgURL"
+        [ngClass]="{ alert: imgURL.invalid }"
+      />
+    </label>
+    <label class="description">
+      Description:
+      <textarea
+        type="text"
+        formControlName="description"
+        required
+        #description
+        name="description"
+        id="description"
+        [ngClass]="{ alert: description.invalid }"
+      ></textarea>
+    </label>
+    <div class="error-message" *ngIf="!bookForm.valid && bookForm.touched">
+      Please fill all required fields.
+    </div>
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+    <div class="success-message" *ngIf="submittedSuccessfully">
+      "{{ bookTitle }}" has been submitted successfully.
+    </div>
+    <button type="submit" [disabled]="!bookForm.valid">Add Book</button>
+  </form>
+</div>

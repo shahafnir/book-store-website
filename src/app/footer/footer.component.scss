@@ -1,0 +1,36 @@
+@import "../../sass/styles.scss";
+
+.footer-container {
+  width: 100vw;
+  margin-top: 40px;
+  background-color: $background-color-footer-darker;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .credits {
+    font-size: $font-size-default * 1.1;
+    color: $text-primary-color-light;
+
+    .send-mail,
+    .admin {
+      color: $text-primary-color-light;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:active,
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 995px) {
+  .footer-container {
+    .credits {
+      font-size: $font-size-default * 1.2;
+    }
+  }
+}

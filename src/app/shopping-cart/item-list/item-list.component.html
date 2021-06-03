@@ -1,0 +1,25 @@
+<div class="item-list-container">
+  <table class="items">
+    <tr class="headers">
+      <th class="header">Title</th>
+      <th class="header">Author</th>
+      <th class="header small">Amount</th>
+      <th class="header medium">Total price</th>
+    </tr>
+    <tr *ngFor="let item of cartItems" class="item">
+      <td class="edit-button" (click)="onRemoveItem(item.bookId)">X</td>
+      <td class="detail title" (click)="onBookDetails(item.bookId)">
+        <div class="text">{{ item.title }}</div>
+      </td>
+      <td class="detail author">{{ item.author }}</td>
+      <td class="detail amount">
+        <button (click)="onReduceItemAmount(item.bookId)">-</button>
+        {{ item.amount }}
+        <button (click)="onIncreaseItemAmount(item.bookId)">+</button>
+      </td>
+      <td class="detail total-price">
+        {{ item.priceUSD * item.amount | number: "1.0-2" }} $
+      </td>
+    </tr>
+  </table>
+</div>

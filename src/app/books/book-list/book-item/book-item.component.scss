@@ -1,166 +1,103 @@
-@import "../../../../sass/variables";
+@import "../../../../sass/styles.scss";
 
 .book-item-container {
-  width: 270px;
-  margin: 10px;
-  margin-top: 20px;
-  padding: 10px;
-  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  margin: 10px 5px;
+  padding: 5px 5px 10px;
+  background-color: $background-color-card;
+  box-shadow: $box-shadow-default;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  overflow: hidden;
 
   .book-cover-container {
     width: 100%;
+    height: 100%;
 
     .book-cover {
-      width: 100%;
-      height: 100%;
-      margin: auto;
+      @include book-cover;
     }
   }
 
   .separator {
-    margin: 5px auto;
-    background-color: $background-color-header-dark;
-    width: 70%;
-    height: 3px;
-    border-radius: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    -ms-border-radius: 40px;
-    -o-border-radius: 40px;
+    @include seperator-horizontal;
   }
 
-  .book-details {
-    .title {
-      font-size: $font-size-default * 1.4;
-      margin-bottom: 8px;
-    }
+  .book-details-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 5px;
 
-    .detail {
-      font-size: $font-size-default;
+    .detail-item {
+      max-height: 36px;
+      font-size: $font-size-default * 1.1;
+
+      &.title {
+        width: fit-content;
+        max-height: 46px;
+        font-size: $font-size-default * 1.4;
+        cursor: pointer;
+        margin-bottom: 25px;
+        overflow-y: hidden;
+      }
 
       &.price {
         opacity: 0.8;
-        margin-top: 15px;
         font-weight: 600;
+        margin-top: 20px;
       }
     }
   }
 
   .add-to-cart-btn-container {
-    width: 100%;
-    margin-top: 15px;
     display: flex;
     justify-content: center;
 
     button {
-      width: 80%;
-      padding: 5px 15px;
-      background-color: $background-color-header-darker;
-      color: $text-color-light;
-      font-size: $font-size-default * 1.1;
-      font-weight: 600;
-      border: 2px solid $background-color-header-dark;
-      border-radius: 7px;
-      -webkit-border-radius: 7px;
-      -moz-border-radius: 7px;
-      -ms-border-radius: 7px;
-      -o-border-radius: 7px;
-      outline-style: none;
-      cursor: pointer;
-
-      &:active,
-      &:hover {
-        background-color: $background-color-header-dark;
-      }
+      @include button-primary;
+      margin-bottom: 0;
     }
+  }
+
+  .admin-options {
+    @include admin-options;
   }
 }
 
 @media only screen and (min-width: 414px) {
   .book-item-container {
-    width: 175px;
+    position: relative;
+    width: 187px;
+    height: 450px;
 
-    .book-cover-container {
-      .book-cover {
-      }
-    }
+    .book-details-list {
+      // height: 123px;
+      padding: 0;
 
-    .book-details {
       .title {
-      }
-
-      .detail {
-      }
-    }
-  }
-}
-
-@media only screen and (min-width: 995px) {
-  .book-item-container {
-    width: 220px;
-
-    .book-cover-container {
-      .book-cover {
-      }
-    }
-
-    .book-details {
-      .title {
-      }
-
-      .detail {
-      }
-    }
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .book-item-container {
-    .book-cover-container {
-      .book-cover {
-      }
-    }
-
-    .book-details {
-      .title {
-        font-size: $font-size-default * 1.5;
-      }
-
-      .detail {
-        font-size: $font-size-default * 1.1;
+        margin: 0 auto;
+        text-align: center;
       }
     }
 
     .add-to-cart-btn-container {
-      button {
-        font-size: $font-size-default * 1.2;
-      }
+      position: absolute;
+      width: 100%;
+      bottom: 5px;
+      left: 0;
     }
   }
 }
 
 @media only screen and (min-width: 1460px) {
   .book-item-container {
-    width: 240px;
+    width: 220px;
+    height: 480px;
     margin: 15px;
     margin-top: 20px;
-
-    .book-cover-container {
-      .book-cover {
-      }
-    }
-
-    .book-details {
-      .title {
-      }
-
-      .detail {
-      }
-    }
   }
 }

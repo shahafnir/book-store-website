@@ -1,0 +1,11 @@
+@import "../../../sass/styles.scss";
+
+.user-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .login-form {
+    @include form-default;
+  }
+}

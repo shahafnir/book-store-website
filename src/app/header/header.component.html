@@ -5,21 +5,92 @@
     </div>
     <div class="text">GIMME SOME BOOKS</div>
   </div>
-  <ul class="links-list">
+  <ul class="link-list">
     <li class="link-item">
-      <a routerLinkActive="active" [routerLink]="['/books']" class="link"
+      <a
+        routerLinkActive="active"
+        [routerLink]="['/books']"
+        class="link"
+        (click)="closeOpenMenus()"
         >Books</a
       >
     </li>
-    <li class="link-item">
-      <a routerLinkActive="active" [routerLink]="['/cart']" class="link"
+    <li class="link-item" *ngIf="!isAdminAccount">
+      <a
+        routerLinkActive="active"
+        [routerLink]="['/cart']"
+        class="link"
+        (click)="closeOpenMenus()"
         >Cart</a
       >
     </li>
-    <li class="link-item">
-      <a routerLinkActive="active" [routerLink]="['/auth']" class="link"
-        >Login / Create Account</a
+    <li class="link-item" *ngIf="!isAdminAccount">
+      <a href="javascript:void(0)" class="link" (click)="toggleAccountMenu()">{{
+        accountName
+      }}</a>
+      <ul class="link-list vertical" *ngIf="accountMenuOpen">
+        <li class="link-item" *ngIf="!userLoggedIn">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/user/new']"
+            class="link"
+            (click)="toggleAccountMenu()"
+            >Create Account</a
+          >
+        </li>
+        <li class="link-item" *ngIf="!userLoggedIn">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/user/login']"
+            class="link"
+            (click)="toggleAccountMenu()"
+            >Log In</a
+          >
+        </li>
+        <li class="link-item" *ngIf="userLoggedIn">
+          <a class="link" (click)="onLogoutUser()">Log Out</a>
+        </li>
+      </ul>
+    </li>
+    <li class="link-item" *ngIf="isAdminAccount">
+      <a
+        href="javascript:void(0)"
+        class="link"
+        (click)="toggleAdminAccountMenu()"
+        >Admin account</a
       >
+      <ul class="link-list vertical" *ngIf="adminAccountMenuOpen">
+        <li class="link-item">
+          <a
+            href="javascript:void(0)"
+            routerLinkActive="active"
+            [routerLink]="['/books/new']"
+            class="link"
+            (click)="closeOpenMenus()"
+            >Add Books</a
+          >
+        </li>
+        <li class="link-item">
+          <a
+            href="javascript:void(0)"
+            routerLinkActive="active"
+            [routerLink]="['/books']"
+            class="link"
+            (click)="closeOpenMenus()"
+            >Edit/Remove Books</a
+          >
+        </li>
+        <li class="link-item">
+          <a href="javascript:void(0)" class="link" (click)="onLogoutAdmin()"
+            >Logout</a
+          >
+        </li>
+        <li class="link-item">
+          <a href="javascript:void(0)" class="link" (click)="onLogoutAdminAll()"
+            >Logout All</a
+          >
+        </li>
+      </ul>
     </li>
   </ul>
 </div>

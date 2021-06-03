@@ -1,1 +1,46 @@
-<p>book-details works!</p>
+<div class="book-details-container">
+  <div class="label">
+    <h1 class="title">{{ book.title }}</h1>
+    <h3 class="author">by {{ book.author }}</h3>
+  </div>
+  <div class="info">
+    <div class="book-cover-container">
+      <img
+        src="{{ book.imgURL }}"
+        alt="book cover"
+        class="book-cover"
+        title="{{ book.title }}"
+      />
+    </div>
+    <div class="separator"></div>
+    <div class="book-details-list">
+      <p class="detail-item"><span>Language:</span> {{ book.language }}</p>
+      <p class="detail-item"><span>Publisher:</span> {{ book.publisher }}</p>
+      <p class="detail-item">
+        <span>Publication Date:</span> {{ book.publicationDate | date }}
+      </p>
+      <p class="detail-item price"><span>Price:</span> {{ book.priceUSD }} $</p>
+    </div>
+  </div>
+  <div class="add-to-cart-btn-container" *ngIf="!adminUserLoggedIn">
+    <button (click)="onAddToCart()">Add To Cart</button>
+  </div>
+  <div class="admin-options" *ngIf="adminUserLoggedIn">
+    <button class="admin-option-button" title="Delete" (click)="onRemoveBook()">
+      <img src="../../../../assets/images/bin_icon.png" alt="bin icon" />
+    </button>
+    <button class="admin-option-button" title="Edit" (click)="onEditBook()">
+      <img
+        src="../../../../assets/images/edit_icon.png"
+        alt="edit icon"
+        style="padding: 3px"
+      />
+    </button>
+  </div>
+  <div class="book-description">
+    <label>Description:</label>
+    <p class="content">
+      {{ book.description }}
+    </p>
+  </div>
+</div>

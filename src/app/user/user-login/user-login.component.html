@@ -1,0 +1,36 @@
+<div class="user-login-container">
+  <form class="login-form" (ngSubmit)="onSubmit()" [formGroup]="userLoginForm">
+    <h2 class="title">Please log in to your account</h2>
+    <label>
+      Email:
+      <input
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        required
+        email
+      />
+    </label>
+    <label>
+      Password:
+      <input
+        type="password"
+        formControlName="password"
+        autocomplete="current-password"
+        required
+        minlength="8"
+      />
+    </label>
+
+    <div
+      class="error-message"
+      *ngIf="!userLoginForm.valid && userLoginForm.touched"
+    >
+      Please enter valid email and password.
+    </div>
+    <div class="error-message" *ngIf="authenticationFailed">
+      Unable to login, Authentication faild.
+    </div>
+    <button type="submit" [disabled]="!userLoginForm.valid">Login</button>
+  </form>
+</div>

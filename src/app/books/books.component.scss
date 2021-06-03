@@ -1,3 +1,111 @@
+@import "../../sass/styles.scss";
+
 .books-container {
-  padding: 20px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .search-form-container {
+    width: 90%;
+    min-width: 320px;
+    display: flex;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+
+    .search-label {
+      font-size: $font-size-medium;
+      font-weight: 400;
+      margin: auto 0;
+      white-space: nowrap;
+    }
+
+    .search-options {
+      .option {
+      }
+    }
+
+    .search-value,
+    .search-options {
+      border: none;
+      border-bottom: 1px solid $border-color-light;
+      padding: 4px 2px;
+      background: transparent;
+      font-size: $font-size-medium;
+      outline: none;
+    }
+
+    .search-value {
+      width: 200px;
+      width: clamp(100px, 40vw, 300px);
+
+      &.date {
+        text-align: center;
+      }
+    }
+
+    .input-group {
+      display: flex;
+
+      .search-value {
+        text-align: center;
+        width: 100px;
+      }
+
+      .seperator {
+        font-size: $font-size-big * 0.7;
+        border-bottom: 1px solid $border-color-light;
+        padding: 4px 2px;
+      }
+    }
+
+    .submit-button {
+      margin-left: 10px;
+      border: none;
+      cursor: pointer;
+
+      img {
+        width: 20px;
+      }
+    }
+  }
+
+  .sorting-form {
+    width: 90%;
+    min-width: 320px;
+    margin: 0 0 15px;
+    display: flex;
+    align-items: center;
+
+    .title {
+      font-weight: 400;
+    }
+
+    .sorting-options {
+      margin: 0 3px;
+      border: none;
+      background: transparent;
+      padding: 4px 2px;
+      appearance: none;
+      text-decoration: underline;
+      outline: none;
+
+      option {
+        margin: 0 auto;
+      }
+    }
+
+    .sort-button {
+      margin-right: 5px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+
+      img {
+        width: 12px;
+        height: 12px;
+        cursor: pointer;
+      }
+    }
+  }
 }

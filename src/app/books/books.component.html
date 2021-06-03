@@ -1,3 +1,83 @@
 <div class="books-container">
-  <app-book-list></app-book-list>
+  <form
+    (ngSubmit)="onSearchBook()"
+    [formGroup]="searchForm"
+    class="search-form-container"
+  >
+    <select class="search-options" formControlName="searchCriteria">
+      <option
+        class="option"
+        *ngFor="let option of searchSortOptions"
+        value="{{ option }}"
+      >
+        {{ option }}
+      </option>
+    </select>
+    <input
+      class="search-value"
+      formControlName="searchValue"
+      type="text"
+      *ngIf="
+        searchForm.get('searchCriteria').value !== 'Publication date' &&
+        searchForm.get('searchCriteria').value !== 'Price'
+      "
+    />
+    <input
+      class="search-value date"
+      formControlName="searchValue"
+      type="date"
+      *ngIf="searchForm.get('searchCriteria').value === 'Publication date'"
+    />
+    <div
+      class="input-group"
+      *ngIf="searchForm.get('searchCriteria').value === 'Price'"
+      formGroupName="price"
+    >
+      <input
+        class="search-value"
+        formControlName="min"
+        type="number"
+        placeholder="min"
+      />
+      <div class="seperator">-</div>
+      <input
+        class="search-value"
+        formControlName="max"
+        type="number"
+        placeholder="max"
+      />
+    </div>
+    <button class="submit-button" type="submit">
+      <img src="../../assets/images/magnifying-glass.svg" alt="Search" />
+    </button>
+  </form>
+  <form [formGroup]="sortForm" class="sorting-form">
+    <button type="submit" class="sort-button" (click)="onChangeSortOrder()">
+      <img
+        src="{{
+          sortOrder === -1
+            ? '../../assets/images/sort-down-arrow.svg'
+            : '../../assets/images/sort-up-arrow.svg'
+        }}"
+        alt="sort"
+      />
+    </button>
+    <h3 class="title">Sort by</h3>
+    <select
+      class="sorting-options"
+      formControlName="sortBy"
+      (change)="onSortBooks()"
+    >
+      <option
+        class="option"
+        *ngFor="let sortingOption of searchSortOptions"
+        selected="{{ searchSortOptions[4] }}"
+      >
+        {{ sortingOption }}
+      </option>
+    </select>
+  </form>
+  <div class="book-list">
+    <app-book-list></app-book-list>
+  </div>
 </div>

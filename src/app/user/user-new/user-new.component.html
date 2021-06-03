@@ -1,0 +1,39 @@
+<div class="user-new-container">
+  <h2 class="title">Create New Account</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="new-user-form">
+    <label>
+      Name:
+      <input type="text" formControlName="name" />
+    </label>
+    <label>
+      Email:
+      <input type="email" #email formControlName="email" autocomplete="email" />
+    </label>
+    <p
+      class="error-message input-error"
+      *ngIf="!userForm.get('email').valid && userForm.get('email').touched"
+    >
+      Email address is invalid.
+    </p>
+    <label>
+      Password:
+      <input
+        type="password"
+        formControlName="password"
+        autocomplete="new-password"
+      />
+    </label>
+    <label>
+      Re-enter password:
+      <input
+        type="password"
+        formControlName="passwordValidation"
+        autocomplete="new-password"
+      />
+    </label>
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+    <button type="submit" [disabled]="!userForm.valid">Submit</button>
+  </form>
+</div>

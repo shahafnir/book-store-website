@@ -1,16 +1,79 @@
+@import "../../../sass/styles.scss";
+
 .book-list-container {
-  max-width: 1600px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 1034px;
+
+  @media only screen and (min-width: 1460px) {
+    max-width: 1400px;
+  }
+
+  .book-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .alert-message {
+      margin-top: 20px;
+      font-size: $font-size-medium;
+      font-weight: 600;
+    }
+  }
+
+  .page-numbers {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    .next-previous-btn {
+      @include page-navigation-btn;
+
+      &:disabled {
+        opacity: 0;
+      }
+    }
+
+    .page-number-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .page-item {
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .text {
+          @include page-navigation-btn;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 414px) {
   .book-list-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    .book-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .page-numbers {
+      .page-number-list {
+        .page-item {
+          .text {
+            font-size: $font-size-medium;
+
+            &:hover,
+            &:active {
+            }
+          }
+        }
+      }
+    }
   }
 }
