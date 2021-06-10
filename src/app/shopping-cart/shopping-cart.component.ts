@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserService } from '../user/user.service';
+import { Cart } from './cart.model';
 import { ShoppingCartService } from './shopping-cart.service';
 
 @Component({
@@ -10,21 +10,18 @@ import { ShoppingCartService } from './shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   cartSubscription: Subscription;
-  cart;
+  cart: Cart;
 
-  constructor(
-    private shoppingCartService: ShoppingCartService,
-    private userService: UserService
-  ) {}
+  constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
+    this.shoppingCartService.setCart();
+
     this.cartSubscription = this.shoppingCartService.cartChanged.subscribe(
-      (cart) => {
+      (cart: Cart) => {
         this.cart = cart;
       }
     );
-
-    this.shoppingCartService.setCart();
   }
 
   ngOnDestroy() {

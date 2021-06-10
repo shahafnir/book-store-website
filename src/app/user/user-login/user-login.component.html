@@ -11,6 +11,14 @@
         email
       />
     </label>
+    <p
+      class="error-message input-error"
+      *ngIf="
+        !userLoginForm.get('email').valid && userLoginForm.get('email').touched
+      "
+    >
+      Email address is not valid.
+    </p>
     <label>
       Password:
       <input
@@ -21,13 +29,6 @@
         minlength="8"
       />
     </label>
-
-    <div
-      class="error-message"
-      *ngIf="!userLoginForm.valid && userLoginForm.touched"
-    >
-      Please enter valid email and password.
-    </div>
     <div class="error-message" *ngIf="authenticationFailed">
       Unable to login, Authentication faild.
     </div>

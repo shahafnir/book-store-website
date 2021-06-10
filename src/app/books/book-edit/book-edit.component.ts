@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../book.model';
 import { BooksService } from '../books.service';
 
@@ -20,38 +20,44 @@ export class BookEditComponent implements OnInit {
     imgURL: new FormControl(''),
     description: new FormControl(''),
   });
-
   editSuccess = false;
-
   book: Book;
 
   constructor(
     private booksService: BooksService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   async ngOnInit() {
-    const bookID: String = this.route.snapshot.params.id;
+    const bookId = this.route.snapshot.params.id;
 
-    this.book = <Book>(
-      this.booksService.getBooks().find((book: Book) => book._id === bookID)
+    this.booksService.getBookDetails(bookId).subscribe(
+      (book: Book) => {
+        this.book = book;
+
+        this.bookForm = new FormGroup({
+          title: new FormControl(this.book.title, [Validators.required]),
+          author: new FormControl(this.book.author, [Validators.required]),
+          publisher: new FormControl(this.book.publisher, [
+            Validators.required,
+          ]),
+          publicationDate: new FormControl(
+            new Date(this.book.publicationDate).toISOString().substring(0, 10),
+            [Validators.required]
+          ),
+          language: new FormControl(this.book.language, [Validators.required]),
+          priceUSD: new FormControl(this.book.priceUSD, [Validators.required]),
+          imgURL: new FormControl(this.book.imgURL, [Validators.required]),
+          description: new FormControl(this.book.description, [
+            Validators.required,
+          ]),
+        });
+      },
+      (error) => {
+        this.router.navigate['books'];
+      }
     );
-
-    this.bookForm = new FormGroup({
-      title: new FormControl(this.book.title, [Validators.required]),
-      author: new FormControl(this.book.author, [Validators.required]),
-      publisher: new FormControl(this.book.publisher, [Validators.required]),
-      publicationDate: new FormControl(
-        new Date(this.book.publicationDate).toISOString().substring(0, 10),
-        [Validators.required]
-      ),
-      language: new FormControl(this.book.language, [Validators.required]),
-      priceUSD: new FormControl(this.book.priceUSD, [Validators.required]),
-      imgURL: new FormControl(this.book.imgURL, [Validators.required]),
-      description: new FormControl(this.book.description, [
-        Validators.required,
-      ]),
-    });
   }
 
   async onSubmit() {

@@ -1,5 +1,10 @@
 <div class="book-edit-container">
-  <form (ngSubmit)="onSubmit()" [formGroup]="bookForm" class="new-book-form">
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="bookForm"
+    class="new-book-form"
+    *ngIf="book"
+  >
     <h2 class="title">Edit Mode</h2>
     <label>
       Title:
@@ -97,14 +102,12 @@
       ></textarea>
     </label>
     <div class="error-message" *ngIf="!bookForm.valid && bookForm.touched">
-      Please fill all required fields.
+      Please fill all fields.
     </div>
-    <!-- <div class="error-message" *ngIf="authenticationFailed">
-    Unable to login, Authentication faild.
-  </div> -->
     <button type="submit" [disabled]="!bookForm.valid">Edit Book</button>
     <div class="result" *ngIf="editSuccess">
       "{{ book.title }}" was edited successfully
     </div>
   </form>
+  <div class="error-message" *ngIf="!book">Book was not found...</div>
 </div>

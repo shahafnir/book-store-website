@@ -5,6 +5,12 @@
       Name:
       <input type="text" formControlName="name" />
     </label>
+    <p
+      class="error-message input-error"
+      *ngIf="!userForm.get('name').valid && userForm.get('name').touched"
+    >
+      Name cannot be empty.
+    </p>
     <label>
       Email:
       <input type="email" #email formControlName="email" autocomplete="email" />
@@ -23,14 +29,32 @@
         autocomplete="new-password"
       />
     </label>
+    <p
+      class="error-message input-error"
+      *ngIf="
+        !userForm.get('password').valid && userForm.get('password').touched
+      "
+    >
+      Password must contain at least 8 characters.
+    </p>
     <label>
       Re-enter password:
       <input
         type="password"
         formControlName="passwordValidation"
-        autocomplete="new-password"
+        autocomplete="none"
+        (change)="comparePasswords()"
       />
     </label>
+    <p
+      class="error-message input-error"
+      *ngIf="
+        !userForm.get('passwordValidation').valid &&
+        userForm.get('passwordValidation').touched
+      "
+    >
+      Passwords do not match.
+    </p>
     <div class="error-message">
       {{ errorMessage }}
     </div>

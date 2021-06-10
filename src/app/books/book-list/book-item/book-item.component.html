@@ -34,7 +34,9 @@
     <p class="detail-item" title="{{ book.author }}">by {{ book.author }}</p>
     <p class="detail-item price">Price: {{ book.priceUSD }} $</p>
   </div>
-  <div class="add-to-cart-btn-container" *ngIf="!adminUserLoggedIn">
-    <button (click)="onAddToCart()">Add To Cart</button>
-  </div>
+  <app-add-to-cart-btn
+    *ngIf="!adminUserLoggedIn"
+    [book]="book"
+    class="add-to-cart-btn-container"
+  ></app-add-to-cart-btn>
 </div>

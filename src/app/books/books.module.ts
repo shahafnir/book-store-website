@@ -9,6 +9,7 @@ import { BookItemComponent } from './book-list/book-item/book-item.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookNewComponent } from './book-new/book-new.component';
+import { AddToCartBtnComponent } from './shared/add-to-cart-btn.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { BookNewComponent } from './book-new/book-new.component';
     BookEditComponent,
     BookDetailsComponent,
     BookNewComponent,
+    AddToCartBtnComponent,
   ],
   imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
 })

@@ -1,0 +1,6 @@
+@import "../../../sass/styles.scss";
+
+.add-to-cart-btn {
+  @include button-primary;
+  margin: 0;
+}

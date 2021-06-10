@@ -6,6 +6,7 @@
   .main {
     max-width: 1600px;
     width: 100%;
+    min-height: calc(100vh - 190px);
     margin: 93px auto 0;
     padding: 20px 10px;
   }
@@ -14,6 +15,7 @@
 @media only screen and (min-width: 1024px) {
   .app-container {
     .main {
+      min-height: calc(100vh - 205px);
       margin-top: 106px;
     }
   }

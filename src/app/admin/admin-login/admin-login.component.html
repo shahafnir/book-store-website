@@ -1,5 +1,10 @@
 <div class="admin-login-container">
-  <form class="login-form" (ngSubmit)="onSubmit()" [formGroup]="adminLoginForm">
+  <form
+    class="login-form"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="adminLoginForm"
+    (change)="authenticationFailed = false"
+  >
     <h2 class="title">Please log in to your account</h2>
     <label>
       Email:
@@ -21,7 +26,6 @@
         minlength="8"
       />
     </label>
-
     <div
       class="error-message"
       *ngIf="!adminLoginForm.valid && adminLoginForm.touched"

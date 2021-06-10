@@ -103,4 +103,15 @@
       }
     }
   }
+
+  .search-result-message {
+    font-size: $font-size-medium;
+    color: $text-title-color-dark;
+
+    span {
+      font-size: $font-size-medium;
+      color: $text-title-color-dark;
+      font-weight: 700;
+    }
+  }
 }

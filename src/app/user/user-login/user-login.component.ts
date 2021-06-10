@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
+import { ShoppingCartService } from './../../shopping-cart/shopping-cart.service';
+import { Cart } from 'src/app/shopping-cart/cart.model';
+import { AlertBarService } from './../../alert-bar/alert-bar.service';
 
 @Component({
   selector: 'app-user-login',
@@ -12,7 +15,12 @@ export class UserLoginComponent implements OnInit {
   authenticationFailed: Boolean;
   userLoginForm: FormGroup;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private shoppingCartService: ShoppingCartService,
+    private alertBarService: AlertBarService
+  ) {}
 
   ngOnInit(): void {
     this.userLoginForm = new FormGroup({
@@ -30,15 +38,24 @@ export class UserLoginComponent implements OnInit {
     this.userService.login(this.userLoginForm.value).subscribe(
       (response) => {
         this.userService.setUserToken(response['token']);
-        this.userService.setUserName(response['user']['name']);
+        const userName = response['user']['name'];
+        this.userService.setUserName(userName);
+        this.alertBarService.alertBarMessage.next(
+          `You've logged in successfully as ${userName}`
+        );
 
+        this.shoppingCartService.updateCartRegisteredUser().subscribe(
+          (cart: Cart) => {
+            this.shoppingCartService.calculateTotalCost(cart);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
         this.router.navigate(['/books']);
       },
       (error) => {
-        console.log(error);
-        if (error.status === 400) {
-          this.authenticationFailed = true;
-        }
+        this.authenticationFailed = true;
       }
     );
   }

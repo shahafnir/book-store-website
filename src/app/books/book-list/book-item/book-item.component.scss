@@ -53,18 +53,14 @@
     }
   }
 
+  .admin-options {
+    @include admin-options;
+  }
+
   .add-to-cart-btn-container {
     display: flex;
     justify-content: center;
-
-    button {
-      @include button-primary;
-      margin-bottom: 0;
-    }
-  }
-
-  .admin-options {
-    @include admin-options;
+    margin-top: 20px;
   }
 }
 
@@ -75,7 +71,6 @@
     height: 450px;
 
     .book-details-list {
-      // height: 123px;
       padding: 0;
 
       .title {

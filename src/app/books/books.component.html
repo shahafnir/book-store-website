@@ -77,6 +77,12 @@
       </option>
     </select>
   </form>
+  <div class="search-result-message" *ngIf="searchQuery">
+    Showing search results for
+    <span class="bolder">
+      {{ searchQuery }}
+    </span>
+  </div>
   <div class="book-list">
     <app-book-list></app-book-list>
   </div>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cart } from 'src/app/shopping-cart/cart.model';
+import { ShoppingCartService } from 'src/app/shopping-cart/shopping-cart.service';
 import { UserService } from './../user.service';
+import { AlertBarService } from './../../alert-bar/alert-bar.service';
 
 @Component({
   selector: 'app-user-new',
@@ -10,42 +13,60 @@ import { UserService } from './../user.service';
 })
 export class UserNewComponent implements OnInit {
   errorMessage: String;
-  userForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
-    passwordValidation: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
-  });
-  constructor(private userService: UserService, private router: Router) {}
+  userForm: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private shoppingCartService: ShoppingCartService,
+    private router: Router,
+    private alertBarService: AlertBarService
+  ) {}
+
+  ngOnInit(): void {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      passwordValidation: ['', [Validators.required, Validators.minLength(8)]],
+    });
+  }
+
+  comparePasswords() {
+    const password = this.userForm.get('password').value;
+    const passwordValidation = this.userForm.get('passwordValidation').value;
+
+    if (passwordValidation !== password)
+      this.userForm.get('passwordValidation').setErrors({ notUnique: true });
+  }
 
   onSubmit() {
     this.errorMessage = '';
-
-    if (
-      this.userForm.value.password !== this.userForm.value.passwordValidation
-    ) {
-      this.errorMessage = "passwords don't match";
-      return;
-    }
-
-    this.userForm.removeControl('passwordValidation');
 
     this.userService.createNewUser(this.userForm.value).subscribe(
       (response) => {
         this.userService.setUserToken(response['token']);
         this.userService.setUserName(response['user']['name']);
+
+        this.shoppingCartService.updateCartRegisteredUser().subscribe(
+          (cart: Cart) => {
+            this.shoppingCartService.calculateTotalCost(cart);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        this.alertBarService.alertBarMessage.next(
+          'Account has been created successfully, you are logged in.'
+        );
         this.router.navigate(['/books']);
       },
       (error) => {
-        console.log(error);
+        this.errorMessage =
+          error.error.code === 11000
+            ? 'Email address already exists.'
+            : 'Unexpected error has occurred, account was not created.';
       }
     );
   }

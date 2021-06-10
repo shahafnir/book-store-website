@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { AlertBarService } from './../alert-bar/alert-bar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,11 @@ export class AdminService {
   serverEndpointURL = environment.serverEndpointURL;
   token = new BehaviorSubject<String>(null);
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private alertBarService: AlertBarService
+  ) {}
 
   isLoggedIn() {
     const token = localStorage.getItem('adminToken');
@@ -29,6 +34,9 @@ export class AdminService {
       const token = response['token'];
       localStorage.setItem('adminToken', token);
       this.token.next(token);
+      this.alertBarService.alertBarMessage.next(
+        `You've logged in successfully as Admin`
+      );
 
       this.router.navigate(['books']);
     } catch (error) {
@@ -39,12 +47,10 @@ export class AdminService {
   getHeaders() {
     const token = localStorage.getItem('adminToken');
 
-    const headers = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-        'Content-Type': 'application/json',
-      }),
-    };
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + token,
+      'Content-Type': 'application/json',
+    });
 
     return headers;
   }
@@ -55,7 +61,11 @@ export class AdminService {
 
     try {
       const response = await this.httpClient
-        .post(this.serverEndpointURL + '/admin/' + logoutMethod, {}, headers)
+        .post(
+          this.serverEndpointURL + '/admin/' + logoutMethod,
+          {},
+          { headers }
+        )
         .toPromise();
 
       localStorage.setItem('adminToken', null);

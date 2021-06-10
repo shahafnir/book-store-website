@@ -18,16 +18,12 @@ export class BooksComponent implements OnInit {
     'Publication date',
   ];
   sortOrder = -1;
+  searchQuery;
 
   constructor(private fb: FormBuilder, private booksService: BooksService) {}
 
   ngOnInit() {
-    this.booksService.setBooks(
-      10,
-      0,
-      this.booksService.getLastSearchQuery(),
-      this.booksService.getLastSortQuery()
-    );
+    this.booksService.setBooks(10, 0);
 
     this.searchForm = this.fb.group({
       searchCriteria: [this.searchSortOptions[0]],
@@ -44,9 +40,8 @@ export class BooksComponent implements OnInit {
   }
 
   onSearchBook() {
-    let searchCriteria = this.searchForm
-      .get('searchCriteria')
-      .value.toLowerCase();
+    this.searchQuery = this.searchForm.get('searchCriteria').value;
+    let searchCriteria = this.searchQuery.toLowerCase();
 
     if (searchCriteria === 'publication date') {
       searchCriteria = 'publicationDate';
@@ -57,11 +52,15 @@ export class BooksComponent implements OnInit {
     if (searchCriteria !== 'price') {
       const searchValue = this.searchForm.get('searchValue').value;
 
+      this.searchQuery = searchValue
+        ? this.searchQuery + ': ' + searchValue
+        : '';
       toSearch = searchCriteria + '=' + searchValue;
     } else {
       const minPrice = this.searchForm.get('price').get('min').value || 0;
       const maxPrice = this.searchForm.get('price').get('max').value || 0;
 
+      this.searchQuery += ': ' + minPrice + ' $ - ' + maxPrice + ' $';
       toSearch = searchCriteria + '=' + minPrice + ':' + maxPrice;
     }
 

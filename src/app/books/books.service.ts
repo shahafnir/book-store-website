@@ -81,7 +81,7 @@ export class BooksService {
     const headers = this.adminService.getHeaders();
 
     return this.httpClient
-      .post(this.serverEndpointURL, book, headers)
+      .post(this.serverEndpointURL, book, { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -90,7 +90,7 @@ export class BooksService {
 
     try {
       const response = await this.httpClient
-        .delete(this.serverEndpointURL + bookID, headers)
+        .delete(this.serverEndpointURL + bookID, { headers })
         .toPromise();
 
       console.log(response);
@@ -106,7 +106,7 @@ export class BooksService {
 
     try {
       const response = await this.httpClient
-        .patch(this.serverEndpointURL + bookID, book, headers)
+        .patch(this.serverEndpointURL + bookID, book, { headers })
         .toPromise();
 
       console.log(response);

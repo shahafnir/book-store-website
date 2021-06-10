@@ -13,6 +13,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserModule } from './user/user.module';
 import { ItemListComponent } from './shopping-cart/item-list/item-list.component';
+import { AlertBarComponent } from './alert-bar/alert-bar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ItemListComponent } from './shopping-cart/item-list/item-list.component
     AdminLoginComponent,
     FooterComponent,
     ItemListComponent,
+    AlertBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -79,6 +79,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       (response) => {
         this.userService.setUserName('');
         this.shoppingCartService.resetCart();
+
         this.router.navigate(['/books']);
       },
       (error) => {

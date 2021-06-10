@@ -11,13 +11,11 @@
   .label {
     .title {
       @include title-primary;
-      text-indent: 1rem;
     }
 
     .author {
       @include title-secondary;
-      margin: -15px 0 20px;
-      text-indent: 2rem;
+      margin: -15px 0 20px 32px;
     }
   }
 
@@ -45,9 +43,6 @@
         font-size: $font-size-default * 1.2;
         margin-bottom: 8px;
 
-        &.price {
-        }
-
         span {
           @include title-secondary;
           color: $text-label-color-dark;
@@ -59,14 +54,7 @@
   }
 
   .add-to-cart-btn-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    button {
-      @include button-primary;
-      margin-bottom: 0;
-    }
+    margin: 20px auto;
   }
 
   .admin-options {
@@ -96,15 +84,6 @@
 
 @media only screen and (min-width: 420px) {
   .book-details-container {
-    .label {
-      .title {
-      }
-
-      .author {
-        margin: -15px 0 20px;
-      }
-    }
-
     .info {
       width: 100%;
       flex-direction: row;
@@ -126,21 +105,11 @@
       .book-details-list {
         height: 270px;
         margin: auto 10px;
-
-        .detail-item {
-          &.price {
-          }
-        }
       }
     }
 
     .add-to-cart-btn-container {
       margin: 15px 0 0 10px;
-      justify-content: flex-start;
-
-      button {
-        margin: 0;
-      }
     }
   }
 }
@@ -150,9 +119,6 @@
     padding: 0 20px;
 
     .label {
-      .title {
-      }
-
       .author {
         margin: -20px 0 20px;
       }
@@ -168,15 +134,9 @@
         }
       }
 
-      .separator {
-      }
-
       .book-details-list {
         .detail-item {
           margin-bottom: 15px;
-
-          &.price {
-          }
 
           span {
             font-size: $font-size-default * 1.2;
@@ -187,8 +147,6 @@
 
     .add-to-cart-btn-container {
       margin-left: 30px;
-      button {
-      }
     }
 
     .admin-options {

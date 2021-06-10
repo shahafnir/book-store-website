@@ -86,13 +86,12 @@ export class ShoppingCartService {
       );
   }
 
-  private calculateTotalCost(cart?: Cart) {
+  calculateTotalCost(cart?: Cart) {
     if (cart) this.cart = cart;
 
-    this.cart.totalCost = 0;
-    this.cart.items.forEach((item) => {
-      this.cart.totalCost += item.priceUSD * item.amount;
-    });
+    this.cart.totalCost = this.cart.items.reduce((totalCost, item) => {
+      return totalCost + item.priceUSD * item.amount;
+    }, 0);
 
     this.cartChanged.next(this.cart);
   }
@@ -145,5 +144,13 @@ export class ShoppingCartService {
     cartItem.amount++;
 
     this.calculateTotalCost();
+  }
+
+  updateCartRegisteredUser() {
+    const headers = this.userService.getHeaders();
+
+    return this.httpClient
+      .patch(this.serverEndpointUrl, { items: this.cart.items }, { headers })
+      .pipe(catchError(this.handleError));
   }
 }

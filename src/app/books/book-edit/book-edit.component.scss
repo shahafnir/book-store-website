@@ -12,4 +12,8 @@
   .new-book-form {
     @include form-default;
   }
+
+  .error-message {
+    @include title-secondary;
+  }
 }

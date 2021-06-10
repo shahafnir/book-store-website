@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from './../../admin/admin.service';
 import { BooksService } from './../books.service';
 import { Book } from '../book.model';
-import { ShoppingCartService } from './../../shopping-cart/shopping-cart.service';
-import { UserService } from './../../user/user.service';
 
 @Component({
   selector: 'app-book-details',
@@ -29,9 +27,7 @@ export class BookDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private booksService: BooksService,
     private adminService: AdminService,
-    private router: Router,
-    private shoppingCartService: ShoppingCartService,
-    private userService: UserService
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -49,21 +45,6 @@ export class BookDetailsComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  onAddToCart() {
-    if (!this.userService.isLoggedIn()) {
-      this.shoppingCartService.addToCartUnregisteredUser(this.book._id);
-    } else {
-      this.shoppingCartService.addToCart(this.book._id).subscribe(
-        (cart) => {
-          this.shoppingCartService.setCart();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
   }
 
   onRemoveBook() {
