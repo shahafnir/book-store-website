@@ -72,6 +72,9 @@ export class AdminService {
       this.token.next(null);
 
       this.router.navigate(['']);
+      this.alertBarService.alertBarMessage.next(
+        `you've been logged out successfully`
+      );
     } catch (error) {
       console.log(error);
     }

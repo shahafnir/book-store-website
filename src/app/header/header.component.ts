@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertBarService } from '../alert-bar/alert-bar.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 import { AdminService } from './../admin/admin.service';
 import { UserService } from './../user/user.service';
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private adminService: AdminService,
     private userService: UserService,
     private router: Router,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private alertBarService: AlertBarService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +83,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.shoppingCartService.resetCart();
 
         this.router.navigate(['/books']);
+        this.alertBarService.alertBarMessage.next(
+          `you've been logged out successfully`
+        );
       },
       (error) => {
         console.log(error);
