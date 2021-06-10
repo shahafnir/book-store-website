@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverEndpointURL: 'http://localhost:3000',
+  serverEndpointURL:
+    'http://bookstoreapi-env.eba-jk28vrep.eu-west-1.elasticbeanstalk.com',
 };
 
 /*
