@@ -15,13 +15,13 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
-    this.shoppingCartService.setCart();
-
     this.cartSubscription = this.shoppingCartService.cartChanged.subscribe(
       (cart: Cart) => {
         this.cart = cart;
       }
     );
+
+    this.shoppingCartService.setCart();
   }
 
   ngOnDestroy() {
