@@ -48,16 +48,14 @@
       />
     </div>
     <button class="submit-button" type="submit">
-      <img src="assets/images/magnifying-glass.svg" alt="Search" />
+      <img src="magnifying-glass.svg" alt="Search" />
     </button>
   </form>
   <form [formGroup]="sortForm" class="sorting-form">
     <button type="submit" class="sort-button" (click)="onChangeSortOrder()">
       <img
         src="{{
-          sortOrder === -1
-            ? 'assets/images/sort-down-arrow.svg'
-            : 'assets/images/sort-up-arrow.svg'
+          sortOrder === -1 ? 'sort-down-arrow.svg' : 'sort-up-arrow.svg'
         }}"
         alt="sort"
       />
