@@ -44,18 +44,22 @@ export class UserLoginComponent implements OnInit {
           `You've logged in successfully as ${userName}`
         );
 
-        this.shoppingCartService.updateCartRegisteredUser().subscribe(
-          (cart: Cart) => {
-            this.shoppingCartService.calculateTotalCost(cart);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.updateCart();
         this.router.navigate(['/books']);
       },
       (error) => {
         this.authenticationFailed = true;
+      }
+    );
+  }
+
+  updateCart() {
+    this.shoppingCartService.updateCartRegisteredUser().subscribe(
+      (cart: Cart) => {
+        this.shoppingCartService.calculateTotalCost(cart);
+      },
+      (error) => {
+        console.log(error);
       }
     );
   }
